@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>logged in</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	.books{
+		overflow:scroll;
+		height: 300px;
+		width: 300px;
+	}
+	.booktitles{
+	display: inline-block;
+	}
+	span{
+		font-style: italic;
+	}
+	.recentReviews{
+	width: 500px;
+	display: inline-block;
+	}
+	.booklist{
+		width: 500px;
+		display: inline-block;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+	<div class="recentReviews">
+		
+		<h3>Welcome, you've been logged in, {{request.session.email}} !</h3>
+		<a href="/review">Add Book and Review</a>
+		<a href="/">Logout</a>
+		<h3>Recent Book Reviews: </h3>
+
+		<p><a href="bookprofile/{{review1.book.id}}">{{review1.book.title}}</a></p>
+		<p>Rating: {{review1.rating}}</p>
+		<p><a href="userprofile/{{review1.user.id}}">{{review1.user.first_name}}</a> says: <span>{{review1.review}}</span></p>
+		<p>Posted at: {{review1.created_at}}</p>
+		
+		<p><a href="bookprofile/{{review2.book.id}}">{{review2.book.title}}</a></p>
+		<p>Rating: {{review2.rating}}</p>
+		<p><a href="userprofile/{{review2.user.id}}">{{review2.user.first_name}}</a> says: <span>{{review2.review}}</span></p>
+		<p>Posted at: {{review2.created_at}}</p>
+
+		<p><a href="bookprofile/{{review1.book.id}}">{{review3.book.title}}</a></p>
+		<p>Rating: {{review3.rating}}</p>
+		<p><a href="userprofile/{{review3.user.id}}">{{review3.user.first_name}}</a> says: <span>{{review3.review}}</span></p>
+		<p>Posted at: {{review3.created_at}}</p>
+
+	</div>
+	<div class="booklist">
+		<h3>Other Books with Reviews: </h3>
+		<div class="books">
+		<ul class="list-group">
+		{% for book in books %}
+			<li class="list-group-item"><a class="booktitles" href="bookprofile/{{book.id}}">{{book.title}}</a></li>	
+		{% endfor %}
+		</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

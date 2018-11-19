@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book and Review</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<a href="/logged">Home</a>
+		<a href="/">Logout</a>
+		<h3>Add a New Bok Title and a Review: </h3>
+		<form action="/addreview" method="POST">
+			{% csrf_token %}
+		  <div class="form-group">
+		    <label for="exampleFormControlInput1">Book Title: </label>
+		    <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="name@example.com">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleFormControlSelect1">Choose from the list: </label>
+		    <select class="form-control" name="authorlist"id="exampleFormControlSelect1">
+		    	<option disabled selected value>Select</option>
+		    {% for author in books%}
+		      <option>{{ author.author}}</option>
+		     {% endfor %}
+		    </select>
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleFormControlInput1">Or add a new author: </label>
+		    <input type="text" class="form-control" name="author" id="exampleFormControlInput1" placeholder="Author Name">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleFormControlTextarea1">Review: </label>
+		    <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3"></textarea>
+		  </div>
+		  	<div class="form-group">
+		    <label for="exampleFormControlSelect1">rating: </label>
+		    <select class="form-control" name="rating" id="exampleFormControlSelect1">
+		      <option>1</option>
+		      <option>2</option>
+		      <option>3</option>
+		      <option>4</option>
+		      <option>5</option>
+		    </select>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Add Book and Review</button>
+		</form>
+	</div>
+</body>
+</html>

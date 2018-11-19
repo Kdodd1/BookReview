@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>{{book.title}} Reviews</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<a href="/logged">Home</a> <a href="/">Logout</a>
+		
+		<h2>Title: {{book.title}}</h2>
+		<h2>Author: {{book.author}}</h2>
+		<h3>Reviews:</h3>
+		{% for review in reviews %}
+		<h3>Rating : {{review.rating}}/5</h3>
+		
+		<h3><a href="/userprofile/{{review.user.id}}">{{review.user.first_name}} {{review.user.last_name}} </a> says: {{review.review}}
+		{% if review.user.id == request.session.user_id %}
+			<a href="/delete/{{review.id}}">Delete Review</a>
+		{% endif %}
+		</h3>
+
+		{% endfor %}
+
+		<h1>Add a Review: </h1>
+		<form action="/addreview2" method="POST">
+			{% csrf_token %}
+		  <div class="form-group">
+		    <label for="exampleFormControlTextarea1">Review: </label>
+		    <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3"></textarea>
+		  </div>
+		  	<div class="form-group">
+		    <label for="exampleFormControlSelect1">rating: </label>
+		    <select class="form-control" name="rating" id="exampleFormControlSelect1">
+		      <option>1</option>
+		      <option>2</option>
+		      <option>3</option>
+		      <option>4</option>
+		      <option>5</option>
+		    </select>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Add Book and Review</button>
+		</form>
+
+	</div>
+</body>
+</html>

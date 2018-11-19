@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Reviews</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<a href="/logged">Home</a> <a href="/review">Add Book and Review</a> <a href="/">Logout</a>
+		<h2>User Name: {{user.first_name}} {{user.last_name}}</h2>
+		<h2>Email: {{user.email}}</h2>
+		<h2>Total Reviews: {{reviews.count}} </h2>
+
+		<h3>Posted Reviews on the following books: </h3>
+		<ul class="list-group">
+		{% for reviewedBook in reviews %}
+			<li class="list-group-item"><a class="booktitles" href="/bookprofile/{{reviewedBook.book.id}}">{{reviewedBook.book.title}}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+</body>
+</html>
